@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Generate table with npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  password String
+  score    Int
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("user")
+}
+
+model contact {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("contact")
+}
